@@ -3,6 +3,7 @@ package service
 import (
 	"encoding/json"
 	"fmt"
+	"strings"
 	"time"
 
 	"github.com/giuszeppe/github-activity-go-cli/api"
@@ -35,17 +36,17 @@ type Activity struct {
 	CreatedAt time.Time `json:"created_at"`
 }
 
-func GetActivityForUsername(username string) ([]string, error) {
+func GetActivityForUsername(username string) (string, error) {
 	api := api.GetAPI()
 	out, err := api.Fetch("/users/" + username + "/events")
 	if err != nil {
-		return []string{}, err
+		return "", err
 	}
 
 	activities := parseActivityJson(out)
 	result := formatActivitiesString(activities)
 
-	return result, nil
+	return strings.Join(result, "\n"), nil
 }
 
 func parseActivityJson(text []byte) []Activity {
