@@ -1,17 +1,11 @@
+/*
+Copyright © 2024 NAME HERE <EMAIL ADDRESS>
+
+*/
 package main
 
-import (
-	"fmt"
-	"strings"
-
-	"github.com/giuszeppe/github-activity-go-cli/service"
-)
+import "github.com/giuszeppe/github-activity-go-cli/cmd"
 
 func main() {
-	out, err := service.GetActivityForUsername("giuszeppe")
-	if err != nil {
-		return
-	}
-
-	fmt.Println("Output:\n", strings.Join(out, "\n"))
+	cmd.Execute()
 }
